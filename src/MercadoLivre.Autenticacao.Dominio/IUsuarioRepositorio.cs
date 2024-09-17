@@ -7,5 +7,7 @@ namespace MercadoLivre.Autenticacao.Dominio
         bool Autenticar(string email, string hashSenha);
 
         UsuarioLogin? ObterUsuarioPorEmail(string email);
+
+        void Inserir(UsuarioLogin login);
     }
 }

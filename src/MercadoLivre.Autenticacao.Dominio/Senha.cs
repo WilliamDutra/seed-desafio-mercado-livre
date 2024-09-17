@@ -13,7 +13,7 @@ namespace MercadoLivre.Autenticacao.Dominio
 
         public Senha(string valor)
         {
-            Valor = valor;
+            Valor = HashPassword(valor);
         }
 
 
