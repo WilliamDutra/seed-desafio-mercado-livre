@@ -12,22 +12,22 @@ namespace MercadoLivre.Autenticacao.Dominio
 
         public DateTime LogadoEm { get; set; }
 
-        private UsuarioLogin(Guid id, string login, Senha senha, DateTime logadoEm)
+        private UsuarioLogin(Guid id, string login, string senha, DateTime logadoEm)
         {
             Id = id;
             Login = login;
-            Senha = senha.Valor;
+            Senha = senha;
             LogadoEm = logadoEm;
         }
 
         public static UsuarioLogin Criar(string login, Senha senha)
         {
-            return new UsuarioLogin(Guid.NewGuid(), login, senha, DateTime.Now);
+            return new UsuarioLogin(Guid.NewGuid(), login, senha.Valor, DateTime.Now);
         }
 
         public static UsuarioLogin Restaurar(Guid id, string login, string hasPass,  DateTime logadoEm)
         {
-            return new UsuarioLogin(id, login, new Senha(hasPass), logadoEm);
+            return new UsuarioLogin(id, login, hasPass, logadoEm);
         }
     }
 }

@@ -13,7 +13,12 @@ namespace MercadoLivre.Autenticacao.Dominio
 
         public Senha(string valor)
         {
-            Valor = HashPassword(valor);
+            Valor = HashPassword(valor, GenerateSalt(12));
+        }
+
+        public bool EhValida(string senha, string hash)
+        {
+            return Verify(senha, hash);
         }
 
 

@@ -30,7 +30,7 @@ namespace MercadoLivre.Autenticacao.Aplicacao.Autenticar
 
             var senha = new Senha(command.Senha);
 
-            if (senha.Valor != usuario.Senha)
+            if (!senha.EhValida(command.Senha, usuario.Senha))
                 return new CommandResult("usuário/e ou senha inválidos!", false);
 
             tokenService.Generate(usuario);
