@@ -1,5 +1,8 @@
-﻿using MercadoLivre.Autenticacao.Aplicacao.Usuario;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using MercadoLivre.Autenticacao.Aplicacao;
+using MercadoLivre.Autenticacao.Aplicacao.Usuario;
+using MercadoLivre.Autenticacao.Aplicacao.Autenticar;
 
 namespace MercadoLivre.Api.Controllers
 {
@@ -9,9 +12,12 @@ namespace MercadoLivre.Api.Controllers
     {
         private CadastrarUsuarioCommandHandler _cadastrarUsuarioCommandHandler;
 
-        public UsuarioController(CadastrarUsuarioCommandHandler cadastrarUsuarioCommandHandler)
+        private AutenticarUsuarioCommandHandler _autenticarUsuarioCommandHandler;
+
+        public UsuarioController(CadastrarUsuarioCommandHandler cadastrarUsuarioCommandHandler, AutenticarUsuarioCommandHandler autenticarUsuarioCommandHandler)
         {
             _cadastrarUsuarioCommandHandler = cadastrarUsuarioCommandHandler;
+            _autenticarUsuarioCommandHandler = autenticarUsuarioCommandHandler;
         }
 
         [HttpPost]
@@ -23,5 +29,25 @@ namespace MercadoLivre.Api.Controllers
                 return BadRequest(resultado.Mensagem);
             return Ok(resultado.Mensagem);
         }
+
+        [HttpPost]
+        [Route("entrar")]
+        public IActionResult Entrar(AutenticarUsuarioCommand command)
+        {
+            var resultado = _autenticarUsuarioCommandHandler.Handle(command);
+            if (!resultado.Sucesso)
+                return BadRequest(resultado.Mensagem);
+            return Ok(resultado.Mensagem);
+        }
+
+
+        [HttpGet]
+        [Authorize]
+        [Route("privado")]
+        public string teste()
+        {
+            return "ok";
+        }
+
     }
 }

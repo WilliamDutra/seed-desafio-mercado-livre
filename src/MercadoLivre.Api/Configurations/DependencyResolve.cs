@@ -1,5 +1,6 @@
 ﻿using MercadoLivre.Autenticacao.Data;
 using MercadoLivre.Autenticacao.Dominio;
+using MercadoLivre.Autenticacao.Aplicacao;
 using MercadoLivre.Autenticacao.Aplicacao.Usuario;
 using MercadoLivre.Autenticacao.Aplicacao.Autenticar;
 
@@ -11,6 +12,7 @@ namespace MercadoLivre.Api.Configurations
         {
             services.AddScoped<MercadoLivreDbContext>((conn) => new MercadoLivreDbContext("Server=localhost;Port=5432;User Id=postgres;Password=root;Database=mercadolivre;"));
             services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
+            services.AddScoped<TokenService>();
             return services;
         }
 

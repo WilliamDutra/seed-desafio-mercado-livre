@@ -1,4 +1,7 @@
 using MercadoLivre.Api.Configurations;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace MercadoLivre.Api
 {
@@ -12,6 +15,7 @@ namespace MercadoLivre.Api
             builder.Services.AddControllersWithViews();
             builder.Services.AddRepositorios();
             builder.Services.AddHandlers();
+            builder.Services.AddJwt(builder.Configuration);
 
             var app = builder.Build();
 
@@ -27,6 +31,8 @@ namespace MercadoLivre.Api
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

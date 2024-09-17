@@ -66,7 +66,10 @@ namespace MercadoLivre.Autenticacao.Data
 
             using (var reader = comando.ExecuteReader())
             {
-                usuario = UsuarioLogin.Restaurar(Guid.Parse(reader["id"].ToString()), reader["email"].ToString(), reader["hash_senha"].ToString(), DateTime.Parse(reader["logado_em"].ToString()));
+                while (reader.Read())
+                {
+                    usuario = UsuarioLogin.Restaurar(Guid.Parse(reader["id"].ToString()), reader["email"].ToString(), reader["hash_senha"].ToString(), DateTime.Parse(reader["logado_em"].ToString()));
+                }
             }
 
             return usuario;
