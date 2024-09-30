@@ -15,6 +15,8 @@ namespace MercadoLivre.Aplicacao.CadastrarProduto
 
         public int Quantidade { get; set; }
 
+        public Guid UsuarioId { get; set; }
+
         public override void Validar()
         {
             var validation = new CadastrarProdutoCommandValidation();

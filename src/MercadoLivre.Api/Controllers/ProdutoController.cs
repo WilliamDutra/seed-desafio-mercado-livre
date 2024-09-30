@@ -20,6 +20,8 @@ namespace MercadoLivre.Api.Controllers
         [Authorize]
         public IActionResult Cadastrar(CadastrarProdutoCommand command)
         {
+            var id = Guid.Parse(User.Claims.FirstOrDefault(x => x.Type == "id").Value);
+            command.UsuarioId = id;
             var resultado = _cadastrarProdutoHandler.Handle(command);
             if (!resultado.Sucesso)
                 return BadRequest(resultado);

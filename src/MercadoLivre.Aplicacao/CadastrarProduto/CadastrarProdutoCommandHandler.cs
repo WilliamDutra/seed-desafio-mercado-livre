@@ -20,7 +20,7 @@ namespace MercadoLivre.Aplicacao.CadastrarProduto
             if (!command.EhValido)
                 return new CommandResult(string.Join(",", command.Erros), false);
 
-            var produto = Produto.Criar(command.Nome, command.Descricao, command.Valor, command.Quantidade, command.CategoriaId);
+            var produto = Produto.Criar(command.Nome, command.Descricao, command.Valor, command.Quantidade, command.CategoriaId, command.UsuarioId);
             _produtoRepositorio.Salvar(produto);
 
             return new CommandResult("produto cadastrado com sucesso!", true);

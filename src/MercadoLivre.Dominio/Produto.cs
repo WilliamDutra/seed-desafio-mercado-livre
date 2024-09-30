@@ -18,7 +18,9 @@ namespace MercadoLivre.Dominio
 
         public DateTime CriadoEm { get; private set; }
 
-        private Produto(Guid id, string nome, string descricao, decimal valor, int quantidade, Guid categoriaId, DateTime criadoEm)
+        public Guid UsuarioId { get; private set; }
+
+        private Produto(Guid id, string nome, string descricao, decimal valor, int quantidade, Guid categoriaId, Guid usuarioId, DateTime criadoEm)
         {
             Id = id;
             Nome = nome;
@@ -26,17 +28,18 @@ namespace MercadoLivre.Dominio
             Valor = valor;
             Quantidade = quantidade;
             CategoriaId = categoriaId;
+            UsuarioId = usuarioId;
             CriadoEm = criadoEm;
         }
 
-        public static Produto Criar(string nome, string descricao, decimal valor, int quantidade, Guid categoriaId)
+        public static Produto Criar(string nome, string descricao, decimal valor, int quantidade, Guid usuarioId, Guid categoriaId)
         {
-            return new Produto(Guid.NewGuid(), nome, descricao, valor, quantidade, categoriaId, DateTime.Now);
+            return new Produto(Guid.NewGuid(), nome, descricao, valor, quantidade, categoriaId, usuarioId, DateTime.Now);
         }
 
-        public static Produto Restaurar(Guid id, string nome, string descricao, decimal valor, int quantidade, Guid categoriaId, DateTime criadoEm)
+        public static Produto Restaurar(Guid id, string nome, string descricao, decimal valor, int quantidade, Guid categoriaId, Guid usuarioId, DateTime criadoEm)
         {
-            return new Produto(id, nome, descricao, valor, quantidade, categoriaId, criadoEm);
+            return new Produto(id, nome, descricao, valor, quantidade, categoriaId, usuarioId, criadoEm);
         }
 
     }

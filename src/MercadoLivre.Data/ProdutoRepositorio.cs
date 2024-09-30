@@ -23,7 +23,8 @@ namespace MercadoLivre.Data
 								valor,
 								quantidade,
 								categoria_id,
-								cadastrado_em
+								cadastrado_em,
+                                usuario_id
 							)
 							values
 							(
@@ -33,7 +34,8 @@ namespace MercadoLivre.Data
 								@valor,
 								@quantidade,
 								@categoria_id,
-								@cadastrado_em
+								@cadastrado_em,
+                                @usuario
 							)";
 
             using (var command = new NpgsqlCommand())
@@ -47,6 +49,7 @@ namespace MercadoLivre.Data
                 command.Parameters.Add(new NpgsqlParameter("@quantidade", produto.Quantidade));
                 command.Parameters.Add(new NpgsqlParameter("@categoria_id", produto.CategoriaId));
                 command.Parameters.Add(new NpgsqlParameter("@cadastrado_em", produto.CriadoEm));
+                command.Parameters.Add(new NpgsqlParameter("@usuario", produto.UsuarioId.ToString()));
                 command.ExecuteNonQuery();
             }
 

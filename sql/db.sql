@@ -30,5 +30,6 @@ create table produto
 	valor money not null,
 	quantidade int not null,
 	categoria_id varchar(150) not null,
-	cadastrado_em timestamp
+	cadastrado_em timestamp,
+	usuario_id varchar(150) not null
 );
