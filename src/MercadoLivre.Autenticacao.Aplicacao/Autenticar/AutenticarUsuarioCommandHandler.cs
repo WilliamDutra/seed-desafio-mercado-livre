@@ -33,10 +33,10 @@ namespace MercadoLivre.Autenticacao.Aplicacao.Autenticar
             if (!senha.EhValida(command.Senha, usuario.Senha))
                 return new CommandResult("usuário/e ou senha inválidos!", false);
 
-            tokenService.Generate(usuario);
+            var token = tokenService.Generate(usuario);
 
 
-            return new CommandResult("usuário autenticado com sucesso!", true);
+            return new CommandResult("usuário autenticado com sucesso!", true, token);
         }
     }
 }

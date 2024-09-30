@@ -37,7 +37,7 @@ namespace MercadoLivre.Api.Controllers
             var resultado = _autenticarUsuarioCommandHandler.Handle(command);
             if (!resultado.Sucesso)
                 return BadRequest(resultado.Mensagem);
-            return Ok(resultado.Mensagem);
+            return Ok(resultado);
         }
 
 
