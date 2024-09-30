@@ -12,8 +12,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MercadoLivre.Aplicacao\MercadoLivre.Aplicacao.csproj" />
     <ProjectReference Include="..\MercadoLivre.Autenticacao.Aplicacao\MercadoLivre.Autenticacao.Aplicacao.csproj" />
     <ProjectReference Include="..\MercadoLivre.Autenticacao.Data\MercadoLivre.Autenticacao.Data.csproj" />
+    <ProjectReference Include="..\MercadoLivre.Data\MercadoLivre.Data.csproj" />
   </ItemGroup>
 
 </Project>
