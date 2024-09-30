@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MercadoLivre.Api", "src\Mer
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MercadoLivre.Data", "src\MercadoLivre.Data\MercadoLivre.Data.csproj", "{D2FE756A-46A5-4204-BD4F-440A31464A5A}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Identidade", "Identidade", "{139C1533-2A22-4DD4-9854-85001CA78948}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -54,6 +56,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{95D621A6-A42E-4BF5-A8E5-8CF1B81C4BCB} = {139C1533-2A22-4DD4-9854-85001CA78948}
+		{721DBE97-790B-43B2-80D1-BA4C605DF2D7} = {139C1533-2A22-4DD4-9854-85001CA78948}
+		{B2F6AF6F-B86C-496D-B76F-1CD4F4C5096F} = {139C1533-2A22-4DD4-9854-85001CA78948}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {823FEFBD-97FE-4922-8AE8-ADE18857D5E7}
