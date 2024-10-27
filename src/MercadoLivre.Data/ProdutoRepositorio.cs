@@ -13,6 +13,66 @@ namespace MercadoLivre.Data
             _DbContext = dbContext;
         }
 
+        public Guid AdicionarFoto(Foto foto)
+        {
+            string insert = @"insert into foto
+                            (
+	                            id,
+	                            nome,
+	                            tipo
+                            )
+                            values
+                            (
+	                            @id,
+	                            @nome,
+	                            @tipo
+                            );";
+
+            using (var command = new NpgsqlCommand())
+            {
+                command.CommandText = insert;
+                command.Connection = _DbContext.Conexao;
+                command.Parameters.Add(new NpgsqlParameter("@id", foto.Id));
+                command.Parameters.Add(new NpgsqlParameter("@nome", foto.Nome));
+                command.Parameters.Add(new NpgsqlParameter("@tipo", foto.Tipo));
+                command.ExecuteNonQuery();
+            }
+
+            return foto.Id;
+
+        }
+
+        public void AdicionarGaleria(Galeria galeria)
+        {
+            string insert = @"insert into galeria
+                            (
+	                            produto_id,
+	                            foto_id
+                            )
+                            values
+                            (
+	                            @produto,
+	                            @foto
+                            );";
+
+            foreach (var foto in galeria.Fotos)
+            {
+
+                var fotoId = AdicionarFoto(foto);
+
+                using (var command = new NpgsqlCommand())
+                {
+                    command.CommandText = insert;
+                    command.Connection = _DbContext.Conexao;
+                    command.Parameters.Add(new NpgsqlParameter("@produto", galeria.ProdutoId));
+                    command.Parameters.Add(new NpgsqlParameter("@foto", fotoId));
+                    command.ExecuteNonQuery();
+                }
+
+            }
+
+        }
+
         public Guid Salvar(Produto produto)
         {
 			string insert = @"insert into produto

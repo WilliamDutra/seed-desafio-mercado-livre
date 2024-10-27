@@ -33,3 +33,17 @@ create table produto
 	cadastrado_em timestamp,
 	usuario_id varchar(150) not null
 );
+
+
+create table foto
+(
+	id varchar(150) primary key,
+	nome varchar(100) not null,
+	tipo varchar(50) not null
+);
+
+create table galeria
+(
+	produto_id varchar(150) not null,
+	foto_id varchar(150) not null
+);
