@@ -47,3 +47,12 @@ create table galeria
 	produto_id varchar(150) not null,
 	foto_id varchar(150) not null
 );
+
+create table avaliacao
+(
+	produto_id varchar(150) not null,
+	usuario_id varchar(150) not null,
+	titulo varchar(100) not null,
+	descricao varchar(255) not null,
+	nota int not null
+);

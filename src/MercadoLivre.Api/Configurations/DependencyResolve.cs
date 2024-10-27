@@ -8,6 +8,7 @@ using MercadoLivre.Aplicacao.CriarSubcategoria;
 using MercadoLivre.Autenticacao.Aplicacao.Usuario;
 using MercadoLivre.Autenticacao.Aplicacao.Autenticar;
 using MercadoLivre.Aplicacao.AdicionarImagemAoProduto;
+using MercadoLivre.Aplicacao.AvaliarProduto;
 
 namespace MercadoLivre.Api.Configurations
 {
@@ -32,6 +33,7 @@ namespace MercadoLivre.Api.Configurations
             services.AddScoped<CriarSubcategoriaCommandHandler>();
             services.AddScoped<CadastrarProdutoCommandHandler>();
             services.AddScoped<AdicionarImagemAoProdutoCommandHandler>();
+            services.AddScoped<AvaliarProdutoCommandHandler>();
             return services;
         }
     }

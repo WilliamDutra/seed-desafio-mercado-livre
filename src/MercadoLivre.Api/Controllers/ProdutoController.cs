@@ -1,4 +1,5 @@
 ﻿using MercadoLivre.Aplicacao.AdicionarImagemAoProduto;
+using MercadoLivre.Aplicacao.AvaliarProduto;
 using MercadoLivre.Aplicacao.CadastrarProduto;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -14,10 +15,13 @@ namespace MercadoLivre.Api.Controllers
 
         private AdicionarImagemAoProdutoCommandHandler _adicionarImageAoProdutoHandler;
 
-        public ProdutoController(CadastrarProdutoCommandHandler cadastrarProdutoHandler, AdicionarImagemAoProdutoCommandHandler adicionarImageAoProdutoHandler)
+        private AvaliarProdutoCommandHandler _avaliarProdutoHandler;
+
+        public ProdutoController(CadastrarProdutoCommandHandler cadastrarProdutoHandler, AdicionarImagemAoProdutoCommandHandler adicionarImageAoProdutoHandler, AvaliarProdutoCommandHandler avaliarProdutoHandler)
         {
             _cadastrarProdutoHandler = cadastrarProdutoHandler;
             _adicionarImageAoProdutoHandler = adicionarImageAoProdutoHandler;
+            _avaliarProdutoHandler = avaliarProdutoHandler;
         }
 
         [HttpPost]
@@ -47,6 +51,17 @@ namespace MercadoLivre.Api.Controllers
 
             var resultado = _adicionarImageAoProdutoHandler.Handle(command);
 
+            if (!resultado.Sucesso)
+                return BadRequest(resultado);
+            return Ok(resultado);
+        }
+
+        [HttpPost]
+        [Authorize]
+        [Route("avaliar")]
+        public IActionResult AvaliarProduto(AvaliarProdutoCommand command)
+        {
+            var resultado = _avaliarProdutoHandler.Handle(command);
             if (!resultado.Sucesso)
                 return BadRequest(resultado);
             return Ok(resultado);

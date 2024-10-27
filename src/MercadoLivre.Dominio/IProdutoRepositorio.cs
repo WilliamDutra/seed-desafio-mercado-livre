@@ -10,5 +10,7 @@ namespace MercadoLivre.Dominio
 
         void AdicionarGaleria(Galeria galeria);
 
+        void AdicionarAvaliacao(Avaliacao avaliacao);
+
     }
 }

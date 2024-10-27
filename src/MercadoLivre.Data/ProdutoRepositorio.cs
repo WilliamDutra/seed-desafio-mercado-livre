@@ -13,6 +13,39 @@ namespace MercadoLivre.Data
             _DbContext = dbContext;
         }
 
+        public void AdicionarAvaliacao(Avaliacao avaliacao)
+        {
+            string insert = @"insert into avaliacao
+                            (
+	                            produto_id,
+	                            usuario_id,
+	                            titulo,
+	                            descricao,
+	                            nota
+                            )
+                            values
+                            (
+	                            @produto,
+	                            @usuario,
+	                            @titulo,
+	                            @descricao,
+	                            @nota
+                            );";
+
+            using (var command = new NpgsqlCommand())
+            {
+                command.CommandText = insert;
+                command.Connection = _DbContext.Conexao;
+                command.Parameters.Add(new NpgsqlParameter("@produto", avaliacao.ProdutoId));
+                command.Parameters.Add(new NpgsqlParameter("@usuario", avaliacao.UsuarioId));
+                command.Parameters.Add(new NpgsqlParameter("@titulo", avaliacao.Titulo));
+                command.Parameters.Add(new NpgsqlParameter("@descricao", avaliacao.Descricao));
+                command.Parameters.Add(new NpgsqlParameter("@nota", avaliacao.Nota));
+                command.ExecuteNonQuery();
+            }
+
+        }
+
         public Guid AdicionarFoto(Foto foto)
         {
             string insert = @"insert into foto
