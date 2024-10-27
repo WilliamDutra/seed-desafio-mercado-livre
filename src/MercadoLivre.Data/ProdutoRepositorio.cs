@@ -106,6 +106,39 @@ namespace MercadoLivre.Data
 
         }
 
+        public void AdicionarPergunta(Pergunta pergunta)
+        {
+            string insert = @"insert into pergunta 
+                            (
+	                            produto_id,
+	                            usuario_id,
+	                            titulo,
+	                            descricao,
+	                            data_pergunta
+                            )
+                            values
+                            (
+	                            @produto,
+	                            @usuario,
+	                            @titulo,
+	                            @descricao,
+	                            @data
+                            );";
+
+            using (var command = new NpgsqlCommand())
+            {
+                command.CommandText = insert;
+                command.Connection = _DbContext.Conexao;
+                command.Parameters.Add(new NpgsqlParameter("@produto", pergunta.ProdutoId));
+                command.Parameters.Add(new NpgsqlParameter("@usuario", pergunta.UsuarioId));
+                command.Parameters.Add(new NpgsqlParameter("@titulo", pergunta.Titulo));
+                command.Parameters.Add(new NpgsqlParameter("@descricao", pergunta.Descricao));
+                command.Parameters.Add(new NpgsqlParameter("@data", pergunta.Data));
+                command.ExecuteNonQuery();
+            }
+
+        }
+
         public Guid Salvar(Produto produto)
         {
 			string insert = @"insert into produto

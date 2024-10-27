@@ -12,5 +12,7 @@ namespace MercadoLivre.Dominio
 
         void AdicionarAvaliacao(Avaliacao avaliacao);
 
+        void AdicionarPergunta(Pergunta pergunta);
+
     }
 }

@@ -9,6 +9,7 @@ using MercadoLivre.Autenticacao.Aplicacao.Usuario;
 using MercadoLivre.Autenticacao.Aplicacao.Autenticar;
 using MercadoLivre.Aplicacao.AdicionarImagemAoProduto;
 using MercadoLivre.Aplicacao.AvaliarProduto;
+using MercadoLivre.Aplicacao.PerguntarSobreProduto;
 
 namespace MercadoLivre.Api.Configurations
 {
@@ -34,6 +35,7 @@ namespace MercadoLivre.Api.Configurations
             services.AddScoped<CadastrarProdutoCommandHandler>();
             services.AddScoped<AdicionarImagemAoProdutoCommandHandler>();
             services.AddScoped<AvaliarProdutoCommandHandler>();
+            services.AddScoped<PerguntarSobreOProdutoCommandHandler>();
             return services;
         }
     }

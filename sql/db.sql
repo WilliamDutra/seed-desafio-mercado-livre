@@ -56,3 +56,12 @@ create table avaliacao
 	descricao varchar(255) not null,
 	nota int not null
 );
+
+create table pergunta
+(
+	produto_id varchar(150) not null,
+	usuario_id varchar(150) not null,
+	titulo varchar(100) not null,
+	descricao varchar(255) not null,
+	data_pergunta timestamp not null
+);

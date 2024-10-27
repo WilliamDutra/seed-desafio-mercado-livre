@@ -1,9 +1,12 @@
 ﻿using MercadoLivre.Aplicacao.AdicionarImagemAoProduto;
 using MercadoLivre.Aplicacao.AvaliarProduto;
 using MercadoLivre.Aplicacao.CadastrarProduto;
+using MercadoLivre.Aplicacao.PerguntarSobreProduto;
+using MercadoLivre.Dominio;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.Design;
 
 namespace MercadoLivre.Api.Controllers
 {
@@ -17,11 +20,14 @@ namespace MercadoLivre.Api.Controllers
 
         private AvaliarProdutoCommandHandler _avaliarProdutoHandler;
 
-        public ProdutoController(CadastrarProdutoCommandHandler cadastrarProdutoHandler, AdicionarImagemAoProdutoCommandHandler adicionarImageAoProdutoHandler, AvaliarProdutoCommandHandler avaliarProdutoHandler)
+        private PerguntarSobreOProdutoCommandHandler _perguntarSobreOProdutoHandler;
+
+        public ProdutoController(CadastrarProdutoCommandHandler cadastrarProdutoHandler, AdicionarImagemAoProdutoCommandHandler adicionarImageAoProdutoHandler, AvaliarProdutoCommandHandler avaliarProdutoHandler, PerguntarSobreOProdutoCommandHandler perguntarSobreOProdutoHandler)
         {
             _cadastrarProdutoHandler = cadastrarProdutoHandler;
             _adicionarImageAoProdutoHandler = adicionarImageAoProdutoHandler;
             _avaliarProdutoHandler = avaliarProdutoHandler;
+            _perguntarSobreOProdutoHandler = perguntarSobreOProdutoHandler;
         }
 
         [HttpPost]
@@ -62,6 +68,17 @@ namespace MercadoLivre.Api.Controllers
         public IActionResult AvaliarProduto(AvaliarProdutoCommand command)
         {
             var resultado = _avaliarProdutoHandler.Handle(command);
+            if (!resultado.Sucesso)
+                return BadRequest(resultado);
+            return Ok(resultado);
+        }
+
+        [HttpPost]
+        [Authorize]
+        [Route("perguntar")]
+        public IActionResult PerguntarSobreProduto(PerguntarSobreOProdutoCommand command)
+        {
+            var resultado = _perguntarSobreOProdutoHandler.Handle(command);
             if (!resultado.Sucesso)
                 return BadRequest(resultado);
             return Ok(resultado);
