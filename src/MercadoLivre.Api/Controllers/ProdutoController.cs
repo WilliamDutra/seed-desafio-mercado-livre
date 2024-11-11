@@ -1,6 +1,7 @@
 ﻿using MercadoLivre.Aplicacao.AdicionarImagemAoProduto;
 using MercadoLivre.Aplicacao.AvaliarProduto;
 using MercadoLivre.Aplicacao.CadastrarProduto;
+using MercadoLivre.Aplicacao.ObterProduto;
 using MercadoLivre.Aplicacao.PerguntarSobreProduto;
 using MercadoLivre.Dominio;
 using Microsoft.AspNetCore.Authorization;
@@ -22,12 +23,15 @@ namespace MercadoLivre.Api.Controllers
 
         private PerguntarSobreOProdutoCommandHandler _perguntarSobreOProdutoHandler;
 
-        public ProdutoController(CadastrarProdutoCommandHandler cadastrarProdutoHandler, AdicionarImagemAoProdutoCommandHandler adicionarImageAoProdutoHandler, AvaliarProdutoCommandHandler avaliarProdutoHandler, PerguntarSobreOProdutoCommandHandler perguntarSobreOProdutoHandler)
+        private ObterProdutoQueryHandler _obterProdutoHandler;
+
+        public ProdutoController(CadastrarProdutoCommandHandler cadastrarProdutoHandler, AdicionarImagemAoProdutoCommandHandler adicionarImageAoProdutoHandler, AvaliarProdutoCommandHandler avaliarProdutoHandler, PerguntarSobreOProdutoCommandHandler perguntarSobreOProdutoHandler, ObterProdutoQueryHandler obterProdutoHandler)
         {
             _cadastrarProdutoHandler = cadastrarProdutoHandler;
             _adicionarImageAoProdutoHandler = adicionarImageAoProdutoHandler;
             _avaliarProdutoHandler = avaliarProdutoHandler;
             _perguntarSobreOProdutoHandler = perguntarSobreOProdutoHandler;
+            _obterProdutoHandler = obterProdutoHandler;
         }
 
         [HttpPost]
@@ -81,6 +85,15 @@ namespace MercadoLivre.Api.Controllers
             var resultado = _perguntarSobreOProdutoHandler.Handle(command);
             if (!resultado.Sucesso)
                 return BadRequest(resultado);
+            return Ok(resultado);
+        }
+
+        [HttpGet]
+        public IActionResult ObterDetalhes([FromQuery] Guid id)
+        {
+            var querie = new ObterProdutoQuery();
+            querie.ProdutoId = id;
+            var resultado = _obterProdutoHandler.Handle(querie); 
             return Ok(resultado);
         }
 
